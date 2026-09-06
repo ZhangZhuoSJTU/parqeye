@@ -55,12 +55,11 @@ impl ParquetCtx {
             details: format!("Failed to parse schema: {e}"),
         })?;
 
-        let sample_data =
-            ParquetSampleData::open(file_path, metadata.num_rows).map_err(|e| {
-                FileIOError::SampleDataError {
-                    details: e.to_string(),
-                }
-            })?;
+        let sample_data = ParquetSampleData::open(file_path, metadata.num_rows).map_err(|e| {
+            FileIOError::SampleDataError {
+                details: e.to_string(),
+            }
+        })?;
 
         Ok(ParquetCtx {
             file_path: file_path.to_string(),
